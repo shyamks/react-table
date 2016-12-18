@@ -1,0 +1,9 @@
+.submit {
+    left: 35%;
+    position: relative;
+    width:30%;
+}
+
+.hollow {
+    box-shadow: 1px 1px 5px #555 inset;
+}

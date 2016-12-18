@@ -1,0 +1,28 @@
+{
+  "name": "qhConsole",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "react-noparse": "0.0.1",
+    "react-scripts": "0.8.1"
+  },
+  "dependencies": {
+    "babyparse": "^0.4.6",
+    "csv-parse": "^1.1.7",
+    "parse-xlsx": "0.0.6",
+    "pubsub-js": "^1.5.4",
+    "react": "^15.4.1",
+    "react-bootstrap": "^0.30.7",
+    "react-bootstrap-table": "^2.6.0",
+    "react-dom": "^15.4.1",
+    "react-file-input": "^0.2.5",
+    "xlsjs": "^0.7.5",
+    "xlsx": "^0.8.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
