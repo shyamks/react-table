@@ -4,6 +4,7 @@ import ConsoleTable from './ConsoleTable';
 import {Constants} from '../../Constants';
 import {Button} from 'react-bootstrap';
 
+const columns = ["name","email","phone","cityid","locationid","budgetmin","budgetmax","projectid","campaign","platform"];
 
 let cleanString = (string) => {
     return string.replace(/"/g, "");
@@ -40,14 +41,8 @@ let csvFormatter = (csv) => {
             else {
                 obj[titles[i]] = items[i];
             }
-            // console.log(titles[i],obj);
         }
-        // lastHeader = cleanString(lastHeader);
-        // if(lastHeader)
-            // obj["platform"] = lastElement;
-        // else
-            obj["platform"] = lastElement;
-        // console.log(Object.keys(obj),obj);
+        obj["platform"] = lastElement;
         objects.push(obj);
         count++;
     }
@@ -55,6 +50,23 @@ let csvFormatter = (csv) => {
     return objects;
 };
 
+function validate(csv){
+    let row = csv.split('\n');
+    let header = row[0].split(',');
+    header = cleanStringArray(header);
+    header = header.map((element) =>{
+        return element.split(' ').join('').toLowerCase();
+    });
+    header.pop();
+    header.push("platform");
+    console.log(header,columns);
+    for (let i=0;i<columns.length;i++){
+        if(columns[i] !== header[i]){
+            return false;
+        }
+    }
+    return true;
+}
 
 class ExcelReader extends Component {
     constructor(props) {
@@ -82,25 +94,25 @@ class ExcelReader extends Component {
 
     handleChange(event) {
         let files = event.target.files;
-        console.log(files[0]);
         if (files.length === 1) {
             let reader = new FileReader();
             reader.onload = function () {
                 let csv = reader.result;
-                this.fillTable(csv);
+                if (validate(csv) === true){
+                    this.fillTable(csv);
+                }
+                else{
+                    alert("Please check the table format of the csv uploaded.")
+                }
             }.bind(this);
             reader.readAsText(files[0], 'UTF-8');
         }
-        else if (files.length > 1) {
-            console.log("Too many files");
-        }
-        event.target.value = event.target.defaultValue;
+        event.target.value = null;
     }
 
 
     render() {
         let consoleTable;
-        console.log(this.state.tableObjects.length);
         if (this.state.tableObjects.length > 0) {
             consoleTable = (
                 <div>
@@ -113,7 +125,6 @@ class ExcelReader extends Component {
 
         return (
             <form>
-
                 <Button bsStyle="primary" className="selectFileButton" type="file">Choose
                     the file...<input type="file" accept=".csv" className="selectInputFileButton"
                                       onChange={this.handleChange}/></Button>

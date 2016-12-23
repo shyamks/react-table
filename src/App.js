@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-// import ConsoleTable from './components/js/ConsoleTable';
 import ExcelReader from './components/js/ExcelReader';
 
 class App extends Component {

@@ -7,3 +7,17 @@
 .hollow {
     box-shadow: 1px 1px 5px #555 inset;
 }
+
+.submitButtonSizeLarge {
+    overflow: hidden;
+    position: relative;
+    left:37%;
+    width:20%;
+}
+
+.submitButtonSizeSmall {
+    overflow: hidden;
+    position: relative;
+    left:42%;
+    width:10%;
+}
